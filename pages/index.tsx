@@ -1,15 +1,17 @@
 import LEDButton from '../components/LEDButton'
+import mqtt, {IClientOptions} from "mqtt";
 
 export default function Home() {
-    const options = {
+    const options :IClientOptions= {
+        host: '79642a966da549118f1128bb058d42ce.s2.eu.hivemq.cloud',
+        port: 8883,
+        protocol: 'mqtts',
         username: 'gio.nacimento',
-        password: 'Gio133ebu',
-    };
-
-    const mqtt = require('mqtt');
+        password: 'Gio133ebu'
+    }
 
 // connect to your cluster, insert your host name and port
-    const client = mqtt.connect('tls://79642a966da549118f1128bb058d42ce.s2.eu.hivemq.cloud:8883', options);
+    const client = mqtt.connect(options);
 
 // prints a received message
     client.on('message', function(topic: any, message: any) {
@@ -19,6 +21,19 @@ export default function Home() {
 // reassurance that the connection worked
     client.on('connect', () => {
         console.log('Connected!');
+        client.publish('messageTx', 'Hello, this message was received from the app!', (error: any) => {
+            if(error){
+                console.log(error)
+            }
+        });
+    });
+
+    client.on('disconnect', () => {
+        console.log('Disconnect!');
+    });
+
+    client.on(' ', () => {
+        console.log('Disconnect!');
     });
 
 // prints an error message
@@ -27,18 +42,20 @@ export default function Home() {
     });
 
 // subscribe and publish to the same topic
-        client.subscribe('messages');
-        client.publish('messages', 'Hello, this message was received from the app!');
+
 
         const test = (): void =>{
-            client.subscribe('messages');
-            client.publish('messages', 'Hello, this message was received from the app by clicking!');
+            client.publish('messageTx', 'Hello, this message was received from the app!', (error: any) => {
+                if(error){
+                    console.log(error)
+                }
+            });
         }
 
   return (
       <div className='flex justify-center items-center flex-col'>
         <h1>Controle de LED</h1>
-          <button onClick={test}>Test server</button>
+          <button onClick={() => test()}>Test server</button>
       </div>
   )
 }
