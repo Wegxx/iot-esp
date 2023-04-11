@@ -7,7 +7,7 @@ export default function Home() {
     const mqtt = require('mqtt');
 
 // connect to your cluster, insert your host name and port
-    const client = mqtt.connect('tls://79642a966da549118f1128bb058d42ce.s2.eu.hivemq.cloud:8883', options);
+    const client = mqtt.connect('wss://79642a966da549118f1128bb058d42ce.s2.eu.hivemq.cloud:8884/mqtt', options);
 
 // prints a received message
     client.on('message', function(topic: any, message: any) {
@@ -26,11 +26,10 @@ export default function Home() {
 
 // subscribe and publish to the same topic
     client.subscribe('messages');
-    client.publish('messages', 'Hello, this message was received from the app!');
 
     const test = (): void =>{
         client.subscribe('messages');
-        client.publish('messages', 'Hello, this message was received from the app by clicking!');
+        client.publish('messages', 'Clicking!');
     }
 
     return (
