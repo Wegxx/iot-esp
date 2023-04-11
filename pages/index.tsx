@@ -29,7 +29,7 @@ export default function Home() {
 
     const test = (): void =>{
         client.subscribe('messages');
-        client.publish('messages', 'Clicking');
+        client.publish('messages', 'Clicking!');
     }
 
     return (
