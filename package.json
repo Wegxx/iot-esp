@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-tailwind/react": "^1.4.2",
     "@types/mqtt": "^2.5.0",
     "@types/node": "18.14.6",
     "@types/paho-mqtt": "^1.0.6",
