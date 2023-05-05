@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import {Button, Typography} from "@material-tailwind/react";
-import Image from "next/image";
-import Feeder from "/resources/Screenshot at Apr 18 22-08-55.png"
-import {ISkill} from "@/type";
-import Bar from "@/components/Bar";
-import Pet from "/resources/petRobot.png"
-import type { Dayjs } from 'dayjs';
-import { TimePicker } from 'antd';
+import React, { useState } from "react"
+import {Button, Typography} from "@material-tailwind/react"
+import Image from "next/image"
+import Feeder from "../resources/Screenshot at Apr 18 22-08-55.png"
+import {ISkill} from "@/type"
+import Bar from "@/components/Bar"
+import Pet from "../resources/petRobot.png"
+import type { Dayjs } from 'dayjs'
+import dayjs  from 'dayjs'
+import { TimePicker } from 'antd'
 
 export default function Home() { 
     const [monTime1, setMonTime1] = useState<Dayjs | null>( null )
@@ -52,9 +53,20 @@ export default function Home() {
 // subscribe and publish to the same topic
     client.subscribe('messages');
 
-    const sendTestMessage = (): void =>{
+    const handleTimeSelect = (time: Dayjs | null) => {
+        if (time !== null) {
+          // Obter a hora e o minuto selecionados pelo usuário
+          const selectedTime = dayjs.utc(time.format('HH:mm'), 'HH:mm');
+          
+          // Definir o estado com o horário selecionado
+          setMonTime1(selectedTime);
+        }
+      }
+
+    const sendTimes = (): void =>{
         client.subscribe('messages');
-        client.publish('messages', 'Clicking!');
+        client.publish('messages', `Monday-${monTime1}`);
+        console.log('enviado')
     }
 
     const level: ISkill = {
@@ -64,7 +76,7 @@ export default function Home() {
 
     return (
         <div className="flex flex-col bg-white m-5 md:m-10 rounded-xl p-5 md:p-10">
-    <div className="flex flex-row justify-center">
+        <div className="flex flex-row justify-center">
         <h5 className="text-lg md:text-6xl font-bold bg-gradient-to-r from-blue-800 to-cyan-500 text-transparent bg-clip-text">PET FEEDER</h5>
     </div>
         
@@ -93,43 +105,46 @@ export default function Home() {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
         <div className="flex flex-col m-5">
             <Button variant="text"> Monday </Button> 
-            <TimePicker className="mb-4" format="HH:mm" value={monTime1} onChange={(e) => setMonTime1(e)} onSelect={(e) => setMonTime1(e)} />
-            <TimePicker className="mb-4" format="HH:mm" value={monTime2} onChange={(e) => setMonTime2(e)} onSelect={(e) => setMonTime2(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={monTime1} onChange={(e : any) => setMonTime1(e)} onSelect={(e : any) => setMonTime1(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={monTime2} onChange={(e : any) => setMonTime2(e)} onSelect={(e : any) => setMonTime2(e)} />
         </div>
         <div className="flex flex-col m-5">
             <Button variant="text"> Tuesday </Button> 
-            <TimePicker className="mb-4" format="HH:mm" value={tueTime1} onChange={(e) => setTueTime1(e)} onSelect={(e) => setTueTime1(e)} />
-            <TimePicker className="mb-4" format="HH:mm" value={tueTime2} onChange={(e) => setTueTime2(e)} onSelect={(e) => setTueTime2(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={tueTime1} onChange={(e : any) => setTueTime1(e)} onSelect={(e : any) => setTueTime1(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={tueTime2} onChange={(e : any) => setTueTime2(e)} onSelect={(e : any) => setTueTime2(e)} />
         </div>
         <div className="flex flex-col m-5">
             <Button variant="text"> Wednesday </Button> 
-            <TimePicker className="mb-4" format="HH:mm" value={wedTime1} onChange={(e) => setWedTime1(e)} onSelect={(e) => setWedTime1(e)} />
-            <TimePicker className="mb-4" format="HH:mm" value={wedTime2} onChange={(e) => setWedTime2(e)} onSelect={(e) => setWedTime2(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={wedTime1} onChange={(e : any) => setWedTime1(e)} onSelect={(e : any) => setWedTime1(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={wedTime2} onChange={(e : any) => setWedTime2(e)} onSelect={(e : any) => setWedTime2(e)} />
         </div>
         <div className="flex flex-col m-5"> 
             <Button variant="text"> Thursday </Button> 
-            <TimePicker className="mb-4" format="HH:mm" value={thuTime1} onChange={(e) => setThuTime1(e)} onSelect={(e) => setThuTime1(e)} />
-            <TimePicker className="mb-4" format="HH:mm" value={thuTime2} onChange={(e) => setThuTime2(e)} onSelect={(e) => setThuTime2(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={thuTime1} onChange={(e : any) => setThuTime1(e)} onSelect={(e : any) => setThuTime1(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={thuTime2} onChange={(e : any) => setThuTime2(e)} onSelect={(e : any) => setThuTime2(e)} />
         </div>
         <div className="flex flex-col m-5">
             <Button variant="text"> Friday </Button> 
-            <TimePicker className="mb-4" format="HH:mm" value={friTime1} onChange={(e) => setFriTime1(e)} onSelect={(e) => setFriTime1(e)} />
-            <TimePicker className="mb-4" format="HH:mm" value={friTime2} onChange={(e) => setFriTime2(e)} onSelect={(e) => setFriTime2(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={friTime1} onChange={(e : any) => setFriTime1(e)} onSelect={(e : any) => setFriTime1(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={friTime2} onChange={(e : any) => setFriTime2(e)} onSelect={(e : any) => setFriTime2(e)} />
         </div>
         <div className="flex flex-col m-5">
             <Button variant="text"> Saturday </Button> 
-            <TimePicker className="mb-4" format="HH:mm" value={satTime1} onChange={(e) => setSatTime1(e)} onSelect={(e) => setSatTime1(e)} />
-            <TimePicker className="mb-4" format="HH:mm" value={satTime2} onChange={(e) => setSatTime2(e)} onSelect={(e) => setSatTime2(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={satTime1} onChange={(e : any) => setSatTime1(e)} onSelect={(e : any) => setSatTime1(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={satTime2} onChange={(e : any) => setSatTime2(e)} onSelect={(e : any) => setSatTime2(e)} />
         </div>
         <div className="flex flex-col m-5">
             <Button variant="text"> Sunday </Button> 
-            <TimePicker className="mb-4" format="HH:mm" value={sunTime1} onChange={(e) => setSunTime1(e)} onSelect={(e) => setSunTime1(e)} />
-            <TimePicker className="mb-4" format="HH:mm" value={sunTime2} onChange={(e) => setSunTime2(e)} onSelect={(e) => setSunTime2(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={sunTime1} onChange={(e : any) => setSunTime1(e)} onSelect={(e : any) => setSunTime1(e)} />
+            <TimePicker className="mb-4" format="HH:mm" value={sunTime2} onChange={(e : any) => setSunTime2(e)} onSelect={(e : any) => setSunTime2(e)} />
         </div>
+    </div>
+    <div>
+    <Button onClick={sendTimes()} className="text-sm md:text-base m-5">Submit Times</Button>
     </div>
     <div className="flex flex-col md:flex-row justify-between md:px-40 md:py-10">
         <div className="flex flex-col md:flex-row items-center md:w-2/3">
-            <div className="w-full md:w-1/2 flex flex row">
+            <div className="w-full md:w-1/2 flex flex-row">
                 <Bar data={level}/>
                 <Image className="w-full" src={Feeder} alt="feeder"/>
             </div>
