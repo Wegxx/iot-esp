@@ -53,19 +53,22 @@ export default function Home() {
 // subscribe and publish to the same topic
     client.subscribe('messages');
 
-    const handleTimeSelect = (time: Dayjs | null) => {
-        if (time !== null) {
-          // Obter a hora e o minuto selecionados pelo usuário
-          const selectedTime = dayjs.utc(time.format('HH:mm'), 'HH:mm');
-          
-          // Definir o estado com o horário selecionado
-          setMonTime1(selectedTime);
-        }
-      }
-
     const sendTimes = (): void =>{
         client.subscribe('messages');
-        client.publish('messages', `Monday-${monTime1}`);
+        client.publish('messages', `Monday-${monTime1?.format('HH:mm')}`);
+        client.publish('messages', `Monday-${monTime2?.format('HH:mm')}`);
+        client.publish('messages', `Tuesday-${tueTime1?.format('HH:mm')}`);
+        client.publish('messages', `Tuesday-${tueTime2?.format('HH:mm')}`);
+        client.publish('messages', `Wednesday-${wedTime1?.format('HH:mm')}`);
+        client.publish('messages', `Wednesday-${wedTime2?.format('HH:mm')}`);
+        client.publish('messages', `Thursday-${thuTime1?.format('HH:mm')}`);
+        client.publish('messages', `Thursday-${thuTime2?.format('HH:mm')}`);
+        client.publish('messages', `Friday-${friTime1?.format('HH:mm')}`);
+        client.publish('messages', `Friday-${friTime2?.format('HH:mm')}`);
+        client.publish('messages', `Saturday-${satTime1?.format('HH:mm')}`);
+        client.publish('messages', `Saturday-${satTime2?.format('HH:mm')}`);
+        client.publish('messages', `Sunday-${sunTime1?.format('HH:mm')}`);
+        client.publish('messages', `Sunday-${sunTime2?.format('HH:mm')}`);
         console.log('enviado')
     }
 
@@ -140,13 +143,13 @@ export default function Home() {
         </div>
     </div>
     <div>
-    <Button onClick={sendTimes()} className="text-sm md:text-base m-5">Submit Times</Button>
+    <Button onClick={sendTimes} className="text-sm md:text-base m-5">Submit Times</Button>
     </div>
     <div className="flex flex-col md:flex-row justify-between md:px-40 md:py-10">
         <div className="flex flex-col md:flex-row items-center md:w-2/3">
-            <div className="w-full md:w-1/2 flex flex-row">
+            <div className="w-full md:w-1/3 flex flex-row justify-between">
                 <Bar data={level}/>
-                <Image className="w-full" src={Feeder} alt="feeder"/>
+                <Image className="w-2/3" src={Feeder} alt="feeder"/>
             </div>
         </div>
         <div className="md:w-1/3">
