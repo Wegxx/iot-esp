@@ -6,7 +6,6 @@ import {ISkill} from "@/type"
 import Bar from "@/components/Bar"
 import Pet from "../resources/petRobot.png"
 import type { Dayjs } from 'dayjs'
-import dayjs  from 'dayjs'
 import { TimePicker } from 'antd'
 
 export default function Home() { 
@@ -55,20 +54,20 @@ export default function Home() {
 
     const sendTimes = (): void =>{
         client.subscribe('messages');
-        client.publish('messages', `Monday-${monTime1?.format('HH:mm')}`);
-        client.publish('messages', `Monday-${monTime2?.format('HH:mm')}`);
-        client.publish('messages', `Tuesday-${tueTime1?.format('HH:mm')}`);
-        client.publish('messages', `Tuesday-${tueTime2?.format('HH:mm')}`);
-        client.publish('messages', `Wednesday-${wedTime1?.format('HH:mm')}`);
-        client.publish('messages', `Wednesday-${wedTime2?.format('HH:mm')}`);
-        client.publish('messages', `Thursday-${thuTime1?.format('HH:mm')}`);
-        client.publish('messages', `Thursday-${thuTime2?.format('HH:mm')}`);
-        client.publish('messages', `Friday-${friTime1?.format('HH:mm')}`);
-        client.publish('messages', `Friday-${friTime2?.format('HH:mm')}`);
-        client.publish('messages', `Saturday-${satTime1?.format('HH:mm')}`);
-        client.publish('messages', `Saturday-${satTime2?.format('HH:mm')}`);
-        client.publish('messages', `Sunday-${sunTime1?.format('HH:mm')}`);
-        client.publish('messages', `Sunday-${sunTime2?.format('HH:mm')}`);
+        client.publish('messages', `1-${monTime1?.format('HH:mm')}`);
+        client.publish('messages', `1-${monTime2?.format('HH:mm')}`);
+        client.publish('messages', `2-${tueTime1?.format('HH:mm')}`);
+        client.publish('messages', `2-${tueTime2?.format('HH:mm')}`);
+        client.publish('messages', `3-${wedTime1?.format('HH:mm')}`);
+        client.publish('messages', `3-${wedTime2?.format('HH:mm')}`);
+        client.publish('messages', `4-${thuTime1?.format('HH:mm')}`);
+        client.publish('messages', `4-${thuTime2?.format('HH:mm')}`);
+        client.publish('messages', `5-${friTime1?.format('HH:mm')}`);
+        client.publish('messages', `5-${friTime2?.format('HH:mm')}`);
+        client.publish('messages', `6-${satTime1?.format('HH:mm')}`);
+        client.publish('messages', `6-${satTime2?.format('HH:mm')}`);
+        client.publish('messages', `0-${sunTime1?.format('HH:mm')}`);
+        client.publish('messages', `0-${sunTime2?.format('HH:mm')}`);
         console.log('enviado')
     }
 
