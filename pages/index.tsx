@@ -25,14 +25,14 @@ export default function Home() {
     const [sunTime2, setSunTime2] = useState<Dayjs | null>( null )
 
     const options = {
-        username: 'gio.nacimento',
-        password: 'Gio133ebu',
+        username: 'admin',
+        password: 'Admin123',
     };
 
     const mqtt = require('mqtt');
 
 // connect to your cluster, insert your host name and port
-    const client = mqtt.connect('wss://79642a966da549118f1128bb058d42ce.s2.eu.hivemq.cloud:8884/mqtt', options);
+    const client = mqtt.connect('wss://f196f38f1bb3475dae36136af23cb2e3.s2.eu.hivemq.cloud:8884/mqtt', options);
 
 // prints a received message
     client.on('message', function(topic: any, message: any) {
@@ -51,6 +51,15 @@ export default function Home() {
 
 // subscribe and publish to the same topic
     client.subscribe('messages');
+
+    const handleManualOn = (): void => {
+        client.subscribe('messages');
+        client.publish('messages', `on`);
+    }
+    const handleManualOff = (): void => {
+        client.subscribe('messages');
+        client.publish('messages', `off`);
+    }
 
     const sendTimes = (): void =>{
         client.subscribe('messages');
@@ -93,7 +102,8 @@ export default function Home() {
             <Typography variant="lead" className="text-3xl md:text-6xl">
                 your pets
             </Typography>
-            <Button className="text-sm md:text-base m-5">Go to Shop</Button>
+            <Button onClick={handleManualOn} className="text-sm md:text-base m-5">On</Button>
+            <Button onClick={handleManualOff} className="text-sm md:text-base m-5">Off</Button>
         </div>
         <div className="w-full md:w-1/3">
             <h6 className="text-base md:text-lg font-bold">Friendship is priceless</h6>
