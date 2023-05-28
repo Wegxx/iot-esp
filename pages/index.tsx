@@ -25,14 +25,14 @@ export default function Home() {
     const [sunTime2, setSunTime2] = useState<Dayjs | null>( null )
 
     const options = {
-        username: 'gio.nacimento',
-        password: 'Gio133ebu',
+        username: 'admin',
+        password: 'Admin123',
     };
 
     const mqtt = require('mqtt');
 
 // connect to your cluster, insert your host name and port
-    const client = mqtt.connect('wss://79642a966da549118f1128bb058d42ce.s2.eu.hivemq.cloud:8884/mqtt', options);
+    const client = mqtt.connect('wss://f196f38f1bb3475dae36136af23cb2e3.s2.eu.hivemq.cloud:8884/mqtt', options);
 
 // prints a received message
     client.on('message', function(topic: any, message: any) {
@@ -54,20 +54,13 @@ export default function Home() {
 
     const sendTimes = (): void =>{
         client.subscribe('messages');
-        client.publish('messages', `1-${monTime1?.format('HH:mm')}`);
-        client.publish('messages', `1-${monTime2?.format('HH:mm')}`);
-        client.publish('messages', `2-${tueTime1?.format('HH:mm')}`);
-        client.publish('messages', `2-${tueTime2?.format('HH:mm')}`);
-        client.publish('messages', `3-${wedTime1?.format('HH:mm')}`);
-        client.publish('messages', `3-${wedTime2?.format('HH:mm')}`);
-        client.publish('messages', `4-${thuTime1?.format('HH:mm')}`);
-        client.publish('messages', `4-${thuTime2?.format('HH:mm')}`);
-        client.publish('messages', `5-${friTime1?.format('HH:mm')}`);
-        client.publish('messages', `5-${friTime2?.format('HH:mm')}`);
-        client.publish('messages', `6-${satTime1?.format('HH:mm')}`);
-        client.publish('messages', `6-${satTime2?.format('HH:mm')}`);
-        client.publish('messages', `0-${sunTime1?.format('HH:mm')}`);
-        client.publish('messages', `0-${sunTime2?.format('HH:mm')}`);
+        client.publish('messages', `1:${monTime1?.format('HH:mm')}:${monTime2?.format('HH:mm')}`);
+        client.publish('messages', `2:${tueTime1?.format('HH:mm')}:${tueTime2?.format('HH:mm')}`);
+        client.publish('messages', `3:${wedTime1?.format('HH:mm')}:${wedTime2?.format('HH:mm')}`);
+        client.publish('messages', `4:${thuTime1?.format('HH:mm')}:${thuTime2?.format('HH:mm')}`);
+        client.publish('messages', `5:${friTime1?.format('HH:mm')}:${friTime2?.format('HH:mm')}`);
+        client.publish('messages', `6:${satTime1?.format('HH:mm')}:${satTime2?.format('HH:mm')}`);
+        client.publish('messages', `0:${sunTime1?.format('HH:mm')}:${sunTime2?.format('HH:mm')}`);
         console.log('enviado')
     }
 
