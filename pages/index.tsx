@@ -52,6 +52,15 @@ export default function Home() {
 // subscribe and publish to the same topic
     client.subscribe('messages');
 
+    const handleManualOn = (): void => {
+        client.subscribe('messages');
+        client.publish('messages', `on`);
+    }
+    const handleManualOff = (): void => {
+        client.subscribe('messages');
+        client.publish('messages', `off`);
+    }
+
     const sendTimes = (): void =>{
         client.subscribe('messages');
         client.publish('messages', `1:${monTime1?.format('HH:mm')}:${monTime2?.format('HH:mm')}`);
@@ -86,7 +95,8 @@ export default function Home() {
             <Typography variant="lead" className="text-3xl md:text-6xl">
                 your pets
             </Typography>
-            <Button className="text-sm md:text-base m-5">Go to Shop</Button>
+            <Button onClick={handleManualOn} className="text-sm md:text-base m-5">On</Button>
+            <Button onClick={handleManualOff} className="text-sm md:text-base m-5">Off</Button>
         </div>
         <div className="w-full md:w-1/3">
             <h6 className="text-base md:text-lg font-bold">Friendship is priceless</h6>
